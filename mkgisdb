@@ -1,0 +1,7 @@
+#!/usr/local/bin/bash
+if [ $# -ne 1 ]; then
+	echo "usage: mkgisdb <name>"
+	exit 1
+fi
+
+sudo -u pgsql bash -c "createdb -T postgis_template $1"

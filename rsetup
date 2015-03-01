@@ -1,0 +1,25 @@
+#!/usr/local/bin/bash
+
+# Ensure the user requested software
+if [ $# -ne 1 ]; then
+	echo "usage: rsetup <software>"
+	exit 1
+fi
+
+# Let them know what they wanted; useful when called from scripts
+echo "Install requested: $1"
+echo ""
+
+# See if we know how to do that
+SCRIPT="/usr/rsetup/scripts/$1.sh"
+if [ ! -f $SCRIPT ]; then
+	echo "error: don't know how to install $1"
+	exit 2
+fi
+
+# Update the package list and packages if we haven't done so this week
+sh /usr/rsetup/scripts/__update_packages.sh
+
+# Run the script
+echo "Installing $1..."
+sh $SCRIPT
