@@ -19,6 +19,7 @@ fi
 if [ $LASTUPDATE -lt $CURRENTWEEK ]; then
 	echo "Updating ports tree..."
 	sudo portsnap fetch >/dev/null
+	echo "Extracting ports tree..."
 	if [ -d /usr/ports ]; then
 		sudo portsnap update >/dev/null
 	else
