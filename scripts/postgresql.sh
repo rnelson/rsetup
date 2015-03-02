@@ -23,8 +23,8 @@ sudo bash -c "echo 'host  all  all  10.0.2.0/24  md5' >> /usr/local/pgsql/data/p
 sudo /usr/local/etc/rc.d/postgresql start >/dev/null
 
 # Create a user
-echo "Creating a new superuser named 'root':"
-sudo -u pgsql bash -c "createuser -sdrP root"
+echo "Creating a new superuser named 'vagrant':"
+sudo -u pgsql bash -c "createuser -sdrP vagrant"
 
 # Create a PostGIS template
 sh /usr/rsetup/scripts/__create_postgis_template.sh >/dev/null
