@@ -1,14 +1,10 @@
 #!/usr/local/bin/bash
 PGRESVER=93
 
-#sh /usr/rsetup/scripts/__fetch_ports.sh
-
 # Install
-echo "Building PostgreSQL + PostGIS..."
-#(cd /usr/ports/databases/postgis21 && sudo make -DBATCH install clean >/dev/null)
-sudo pkg install -y postgis
-echo "PostgreSQL/PostGIS built."
-#sudo pkg install -y postgis >/dev/null #perl5 postgresql${PGRESVER}-server postgresql${PGRESVER}-client gdal geos proj gmake iconv libiconv postgis >/dev/null
+echo "Installing PostgreSQL + PostGIS..."
+sudo pkg install -y postgis >/dev/null
+echo "PostgreSQL/PostGIS installed."
 
 # Enable on boot
 sudo bash -c "echo 'postgresql_enable=YES' >> /etc/rc.conf"
@@ -24,8 +20,9 @@ sudo bash -c "echo 'host  all  all  10.0.2.0/24  md5' >> /usr/local/pgsql/data/p
 sudo /usr/local/etc/rc.d/postgresql start >/dev/null
 
 # Create a user
-echo "Creating a new superuser named 'vagrant':"
-sudo -u pgsql bash -c "createuser -sdrP vagrant"
+echo "Creating a new superuser named 'root' with password 'vagrant':"
+sudo -u pgsql psql -c "create user root with password 'vagrant';"
+echo "root user created."
 
 # Create a PostGIS template
 sh /usr/rsetup/scripts/__create_postgis_template.sh >/dev/null
