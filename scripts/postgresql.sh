@@ -19,11 +19,13 @@ sudo bash -c "echo 'host  all  all  10.0.2.0/24  md5' >> /usr/local/pgsql/data/p
 # Start the server
 sudo /usr/local/etc/rc.d/postgresql start >/dev/null
 
-# Create a user
+# Create a user; use 'vagrant' as the pass because, while these scripts
+# should work on any FreeBSD install, they're largely intended for use
+# with Vagrant
 echo "Creating a new superuser named 'root' with password 'vagrant':"
 sudo -u pgsql createdb pgsql
 sudo -u pgsql psql pgsql pgsql -c "create user root with superuser password 'vagrant';"
-echo "root user created."
+echo "root user created. Please change the password on production systems."
 
 # Create a PostGIS template
 sh /usr/rsetup/scripts/__create_postgis_template.sh >/dev/null
