@@ -21,7 +21,8 @@ sudo /usr/local/etc/rc.d/postgresql start >/dev/null
 
 # Create a user
 echo "Creating a new superuser named 'root' with password 'vagrant':"
-sudo -u pgsql psql -c "create user root with password 'vagrant';"
+sudo -u pgsql createdb pgsql
+sudo -u pgsql psql pgsql pgsql -c "create user root with superuser password 'vagrant';"
 echo "root user created."
 
 # Create a PostGIS template
