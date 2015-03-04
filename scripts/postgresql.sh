@@ -1,11 +1,12 @@
 #!/usr/local/bin/bash
 PGRESVER=93
 
-sh /usr/rsetup/scripts/__fetch_ports.sh
+#sh /usr/rsetup/scripts/__fetch_ports.sh
 
 # Install
 echo "Building PostgreSQL + PostGIS..."
-(cd /usr/ports/databases/postgis21 && sudo make -DBATCH install clean >/dev/null)
+#(cd /usr/ports/databases/postgis21 && sudo make -DBATCH install clean >/dev/null)
+sudo pkg install -y postgis
 echo "PostgreSQL/PostGIS built."
 #sudo pkg install -y postgis >/dev/null #perl5 postgresql${PGRESVER}-server postgresql${PGRESVER}-client gdal geos proj gmake iconv libiconv postgis >/dev/null
 
